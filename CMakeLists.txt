@@ -6,5 +6,5 @@ cmake_minimum_required (VERSION 3.8)
 project ("VS-CMake-SDL")
 
 # Include sub-projects.
-add_subdirectory ("VS-CMake-SDL")
+add_subdirectory ("src")
 
