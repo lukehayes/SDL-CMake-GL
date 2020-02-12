@@ -1,8 +1,8 @@
-﻿#if _WIN32
-    #define GLEW_STATIC
-    #include "eglew.h"
-    #include "glew.h"
-#endif
+﻿//#if _WIN32
+//    #define GLEW_STATIC
+//    #include "eglew.h"
+//    #include "glew.h"
+//#endif
 
 #include <iostream>
 #include "SDL.h"
@@ -11,6 +11,7 @@
 int main(int argc, char* argv[])
 {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+		std::cout << "SDL Not Initialized!" << std::endl;
 		return 1;
 	}
 
@@ -27,7 +28,7 @@ int main(int argc, char* argv[])
 			break;
 		}
 
-		SDL_SetRenderDrawColor(renderer, 10, 10, 10, 255);
+		SDL_SetRenderDrawColor(renderer, 200, 200, 200, 255);
 		SDL_RenderClear(renderer);
 		SDL_RenderPresent(renderer);
 	}
