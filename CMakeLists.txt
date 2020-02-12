@@ -1,24 +1,47 @@
 ﻿# CMakeList.txt : Top-level CMake project file, do global configuration
 # and include sub-projects here.
 #
-cmake_minimum_required (VERSION 3.8)
+cmake_minimum_required (VERSION 3.7)
+project ("app")
 
-project ("VS-CMake-SDL")
+# ------------------------------------------------------
+# WINDOWS
+# ------------------------------------------------------
+if (WIN32)
+    message("Running on Windows")
+    set(INC_DIRS
+        ${PROJECT_SOURCE_DIR}/libs/SDL/include
+        ${PROJECT_SOURCE_DIR}/libs/GLEW/include
+    )
+    include_directories(${INC_DIRS})
+    link_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/SDL/libs")
 
-# Include sub-projects.
-#add_subdirectory ("src")
+    # Add source to this project's executable.
+    add_executable (app "src/main.cpp")
 
-set(INC_DIRS
-	${PROJECT_SOURCE_DIR}/libs/SDL/include
-	${PROJECT_SOURCE_DIR}/libs/GLEW/include
-)
+    target_link_libraries(app SDL2.lib)
+    target_link_libraries(app SDL2main.lib)
 
-include_directories(${INC_DIRS})
+endif(WIN32)
 
-link_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/SDL/libs")
 
-# Add source to this project's executable.
-add_executable (VS-CMake-SDL "src/main.cpp")
+# ------------------------------------------------------
+# OSX
+# ------------------------------------------------------
+if(APPLE)
+    message("Running on APPLE")
 
-target_link_libraries(VS-CMake-SDL SDL2.lib)
-target_link_libraries(VS-CMake-SDL SDL2main.lib)
+    # Modules Path
+    set( CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
+
+    # Find SDL2 on OSX - must be at top
+    find_package (SDL2 REQUIRED)
+
+    include_directories(${SDL2_INCLUDE_DIR})
+
+    # Add source to this project's executable.
+    add_executable (app "src/main.cpp")
+    target_link_libraries (app ${SDL2_LIBRARIES})
+
+endif(APPLE)
+
