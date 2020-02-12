@@ -1,6 +1,8 @@
-﻿#define GLEW_STATIC
-#include "eglew.h"
-#include "glew.h"
+﻿#if _WIN32
+    #define GLEW_STATIC
+    #include "eglew.h"
+    #include "glew.h"
+#endif
 
 #include <iostream>
 #include "SDL.h"
@@ -35,3 +37,4 @@ int main(int argc, char* argv[])
 	SDL_Quit();
 	return 0;
 }
+
