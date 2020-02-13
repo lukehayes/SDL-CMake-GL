@@ -12,8 +12,9 @@ if (WIN32)
     set(INC_DIRS
         ${PROJECT_SOURCE_DIR}/deps/libs/SDL/include
         ${PROJECT_SOURCE_DIR}/deps/libs/GLEW/include
+        ${PROJECT_SOURCE_DIR}/include
     )
-    include_directories(${PROJECT_SOURCE_DIR}/deps/libs/SDL/include)
+    include_directories(${INC_DIRS})
     link_directories(${PROJECT_SOURCE_DIR}/deps/libs/SDL/libs)
 
     # Add source to this project's executable.
