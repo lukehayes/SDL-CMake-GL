@@ -7,7 +7,6 @@
 #include <iostream>
 #include "SDL.h"
 
-
 int main(int argc, char* argv[])
 {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -28,7 +27,7 @@ int main(int argc, char* argv[])
 			break;
 		}
 
-		SDL_SetRenderDrawColor(renderer, 200, 150, 200, 255);
+		SDL_SetRenderDrawColor(renderer, 0, 150, 200, 255);
 		SDL_RenderClear(renderer);
 		SDL_RenderPresent(renderer);
 	}
