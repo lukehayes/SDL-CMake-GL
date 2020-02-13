@@ -1,7 +1,7 @@
 ﻿# CMakeList.txt : Top-level CMake project file, do global configuration
 # and include sub-projects here.
 #
-cmake_minimum_required (VERSION 3.7)
+cmake_minimum_required (VERSION 3.8)
 project ("app")
 
 # ------------------------------------------------------
@@ -10,11 +10,11 @@ project ("app")
 if (WIN32)
     message("Running on Windows")
     set(INC_DIRS
-        ${PROJECT_SOURCE_DIR}/libs/SDL/include
-        ${PROJECT_SOURCE_DIR}/libs/GLEW/include
+        ${PROJECT_SOURCE_DIR}/deps/libs/SDL/include
+        ${PROJECT_SOURCE_DIR}/deps/libs/GLEW/include
     )
-    include_directories(${INC_DIRS})
-    link_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/SDL/libs")
+    include_directories(${PROJECT_SOURCE_DIR}/deps/libs/SDL/include)
+    link_directories(${PROJECT_SOURCE_DIR}/deps/libs/SDL/libs)
 
     # Add source to this project's executable.
     add_executable (app "src/main.cpp")
