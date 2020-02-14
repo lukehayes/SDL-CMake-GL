@@ -10,6 +10,10 @@ project ("app")
 SET(SRC_DIR "src")
 SET(SRC_FILE "${SRC_DIR}/main.cpp")
 
+SET(CORE_INCLUDES
+	${PROJECT_SOURCE_DIR}/include
+)
+
 # ------------------------------------------------------
 # WINDOWS
 # ------------------------------------------------------
@@ -18,7 +22,7 @@ if (WIN32)
     set(INC_DIRS
         ${PROJECT_SOURCE_DIR}/deps/libs/SDL/include
         ${PROJECT_SOURCE_DIR}/deps/libs/GLEW/include
-        ${PROJECT_SOURCE_DIR}/include
+        ${CORE_INCLUDES}
     )
     include_directories(${INC_DIRS})
     link_directories(${PROJECT_SOURCE_DIR}/deps/libs/SDL/libs)
@@ -44,7 +48,10 @@ if(APPLE)
     # Find SDL2 on OSX - must be at top
     find_package (SDL2 REQUIRED)
 
-    include_directories(${SDL2_INCLUDE_DIR})
+    include_directories(
+		${PROJECT_SOURCE_DIR}/include
+		${SDL2_INCLUDE_DIR}
+    )
 
     # Add source to this project's executable.
     add_executable (app "${SRC_FILE}")
