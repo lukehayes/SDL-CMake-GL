@@ -9,9 +9,11 @@ project ("app")
 # ------------------------------------------------------
 SET(SRC_DIR "src")
 SET(SRC_FILE "${SRC_DIR}/main.cpp")
+SET(LIBS_DIR "${PROJECT_SOURCE_DIR}/deps/libs")
 
 SET(CORE_INCLUDES
-	${PROJECT_SOURCE_DIR}/include
+	"${PROJECT_SOURCE_DIR}/include"
+	"${PROJECT_SOURCE_DIR}/deps/libs/glm"
 )
 
 # ------------------------------------------------------
