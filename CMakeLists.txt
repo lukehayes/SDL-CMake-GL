@@ -5,6 +5,12 @@ cmake_minimum_required (VERSION 3.8)
 project ("app")
 
 # ------------------------------------------------------
+# Helper Variables
+# ------------------------------------------------------
+SET(SRC_DIR "src")
+SET(SRC_FILE "${SRC_DIR}/main.cpp")
+
+# ------------------------------------------------------
 # WINDOWS
 # ------------------------------------------------------
 if (WIN32)
@@ -18,7 +24,7 @@ if (WIN32)
     link_directories(${PROJECT_SOURCE_DIR}/deps/libs/SDL/libs)
 
     # Add source to this project's executable.
-    add_executable (app "src/main.cpp")
+    add_executable (app "${SRC_FILE}")
 
     target_link_libraries(app SDL2.lib)
     target_link_libraries(app SDL2main.lib)
@@ -41,7 +47,7 @@ if(APPLE)
     include_directories(${SDL2_INCLUDE_DIR})
 
     # Add source to this project's executable.
-    add_executable (app "src/main.cpp")
+    add_executable (app "${SRC_FILE}")
     target_link_libraries (app ${SDL2_LIBRARIES})
 
 endif(APPLE)
