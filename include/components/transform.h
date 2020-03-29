@@ -38,7 +38,6 @@ class Transform : public Component {
             this->position.y = y;
         }
 
-    private:
         V2i position;
 };
 
