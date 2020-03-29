@@ -10,4 +10,11 @@ class Vec2 {
         T y;
 };
 
+/**
+ * Typedef
+ */
+typedef Vec2<int> V2i;
+typedef Vec2<float> V2f;
+typedef Vec2<double> V2d;
+
 #endif
