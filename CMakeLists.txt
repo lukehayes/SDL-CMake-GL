@@ -1,7 +1,7 @@
 ﻿# CMakeList.txt : Top-level CMake project file, do global configuration
 # and include sub-projects here.
 #
-cmake_minimum_required (VERSION 3.8)
+cmake_minimum_required (VERSION 3.7)
 project ("app")
 
 # ------------------------------------------------------
@@ -39,10 +39,10 @@ endif(WIN32)
 
 
 # ------------------------------------------------------
-# OSX
+# OSX | LINUX
 # ------------------------------------------------------
-if(APPLE)
-    message("Running on APPLE")
+if(APPLE OR UNIX)
+    message("Running on APPLE or LINUX")
 
     # Modules Path
     set( CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
