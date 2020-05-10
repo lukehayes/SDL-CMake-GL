@@ -59,5 +59,5 @@ if(APPLE OR UNIX)
     add_executable (app "${SRC_FILE}")
     target_link_libraries (app ${SDL2_LIBRARIES})
 
-endif(APPLE)
+endif(APPLE OR UNIX)
 
