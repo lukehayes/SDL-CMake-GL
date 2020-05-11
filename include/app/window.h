@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef APP_WINDOW_H
 #define APP_WINDOW_H
 
