@@ -20,12 +20,15 @@ SET(CORE_INCLUDES
 # WINDOWS
 # ------------------------------------------------------
 if (WIN32)
+
     message("Running on Windows")
+
     set(INC_DIRS
         ${PROJECT_SOURCE_DIR}/deps/libs/SDL/include
         ${PROJECT_SOURCE_DIR}/deps/libs/GLEW/include
         ${CORE_INCLUDES}
     )
+
     include_directories(${INC_DIRS})
     link_directories(${PROJECT_SOURCE_DIR}/deps/libs/SDL/libs)
 
