@@ -9,26 +9,13 @@
 
 #include <iostream>
 #include "SDL.h"
+#include "app/window.h"
 
 int main(int argc, char* argr[])
 {
-    
-	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-		std::cout << "SDL Not Initialized!" << std::endl;
-		return 1;
-	}
 
-    SDL_GL_SetAttribute( SDL_GL_CONTEXT_MAJOR_VERSION, 3  );
-    SDL_GL_SetAttribute( SDL_GL_CONTEXT_MINOR_VERSION, 3  );
-    SDL_GL_SetAttribute( SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE  );
+    App::Window window(800, 600, "Window Title");
 
-    SDL_Window* window = SDL_CreateWindow(
-        "SDL2 OpenGL",
-        0,0,800,600,
-        SDL_WINDOW_OPENGL|SDL_WINDOW_RESIZABLE
-    );
-
-    SDL_GLContext context = SDL_GL_CreateContext(window);
 
     GLenum err = glewInit();
     if (GLEW_OK != err)
@@ -50,12 +37,10 @@ int main(int argc, char* argr[])
         glClearColor(0.0,0.5,0.5,1);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        SDL_GL_SwapWindow(window);
+        SDL_GL_SwapWindow(window.getWindow());
 
 	}
 
-	SDL_GL_DeleteContext(context);
-	SDL_DestroyWindow(window);
 	SDL_Quit();
 
 	return 0;
