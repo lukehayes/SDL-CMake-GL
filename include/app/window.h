@@ -9,6 +9,8 @@ namespace App {
             : m_width(width), m_height(height), m_title(title)
         {
 
+            // Initialize SDL, Create SDL_
+
             if (SDL_Init(SDL_INIT_VIDEO) < 0) {
                 std::cout << "SDL Not Initialized!" << std::endl;
             }
@@ -18,8 +20,11 @@ namespace App {
             SDL_GL_SetAttribute( SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE  );
 
             m_window = SDL_CreateWindow(
-                    m_title,
-                0,0,m_width, m_height,
+                m_title,
+                SDL_WINDOWPOS_CENTERED,
+                SDL_WINDOWPOS_CENTERED,
+                m_width, 
+                m_height,
                 SDL_WINDOW_OPENGL|SDL_WINDOW_RESIZABLE
             );
 
