@@ -2,6 +2,7 @@
 #define APP_H
 
 #include "app/window.h"
+#include "GL/shader.h"
 
 namespace App {
 
@@ -21,12 +22,13 @@ namespace App {
             std::cout << "Render" << std::endl;
         }
 
-
         void loop() 
         {
             const int MS_PER_UPDATE = 30;
             double previous = SDL_GetTicks();
             double lag = 0.0;
+
+            GL::Shader shader("../assets/shaders/v.glsl", "../assets/shaders/f.glsl");
 
             SDL_Event event;
 
@@ -56,7 +58,10 @@ namespace App {
                 glClearColor(0.0,0.5,0.5,1);
                 glClear(GL_COLOR_BUFFER_BIT);
 
-                render();
+                //render();
+                shader.use();
+                glDrawArrays(GL_TRIANGLES, 0, 3);
+
 
                 SDL_GL_SwapWindow(m_window.getWindow());
             }

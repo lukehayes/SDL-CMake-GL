@@ -28,9 +28,7 @@ void draw(const std::vector<float>& verticies) {
     glBufferData(GL_ARRAY_BUFFER, sizeof(float) * verticies.size(), verticies.data(), GL_STATIC_DRAW );
 
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-    
-
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 }
 
 int main(int argc, char* argr[])
@@ -54,7 +52,6 @@ int main(int argc, char* argr[])
 
     draw(v);
 
-    GL::Shader shader("../v.vsh", "../f.vsh");
 
     app.run();
 
