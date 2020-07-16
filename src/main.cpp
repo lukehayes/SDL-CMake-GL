@@ -27,19 +27,36 @@ int main(int argc, char* argr[])
 
 	SDL_Event event;
 
-	while (1) {
+    const int MS_PER_UPDATE = 30;
+	double previous = SDL_GetTicks();
+	double lag = 0.0;
 
-		SDL_PollEvent(&event);
-		if (event.type == SDL_QUIT) {
-			break;
-		}
+    while (true)
+        {
+            double current = SDL_GetTicks();
+            double elapsed = current - previous;
+            previous = current;
+            lag += elapsed;
 
-        glClearColor(0.0,0.5,0.5,1);
-        glClear(GL_COLOR_BUFFER_BIT);
+            // processInput();
 
-        SDL_GL_SwapWindow(window.getWindow());
+            SDL_PollEvent(&event);
+            if (event.type == SDL_QUIT) {
+                break;
+            }
 
-	}
+            while (lag >= MS_PER_UPDATE)
+            {
+                // Update here
+                lag -= MS_PER_UPDATE;
+            }
+
+            // Render here
+            glClearColor(0.0,0.5,0.5,1);
+            glClear(GL_COLOR_BUFFER_BIT);
+
+            SDL_GL_SwapWindow(window.getWindow());
+        }
 
 	SDL_Quit();
 
