@@ -14,10 +14,11 @@
 #include "GL/shader.h"
 
 
-void Draw(const std::vector<float>& verticies) {
+void Draw(const std::vector<float>& verticies, const std::vector<unsigned int>& indicies) {
 
     GLuint VAO;
     GLuint VBO;
+    GLuint EBO;
 
     glGenVertexArrays(1, &VAO);
     glBindVertexArray(VAO);
@@ -36,7 +37,10 @@ void Draw(const std::vector<float>& verticies) {
     // the colour attribs. Then every six verts is our next colour.
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, (void*)12);
 
-    glBindVertexArray(0);
+    glGenBuffers(GL_ELEMENT_ARRAY_BUFFER, &EBO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * indicies.size(), indicies.data(), GL_STATIC_DRAW );
+
 }
 
 int main(int argc, char* argr[])
@@ -50,6 +54,11 @@ int main(int argc, char* argr[])
          0.0f,  0.5f, 0.0f, 0.0f,0.0f,1.0f
     };
 
+    std::vector<unsigned int> i = {
+        0,1,3,
+        1,2,3
+    };
+
     GLenum err = glewInit();
     if (GLEW_OK != err)
     {
@@ -58,7 +67,7 @@ int main(int argc, char* argr[])
     }
     fprintf(stdout, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 
-    Draw(v);
+    Draw(v, i);
 
 
     app.Run();
