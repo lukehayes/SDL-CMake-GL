@@ -14,7 +14,7 @@
 #include "GL/shader.h"
 
 
-void draw(const std::vector<float>& verticies) {
+void Draw(const std::vector<float>& verticies) {
 
     GLuint VAO;
     GLuint VBO;
@@ -50,10 +50,10 @@ int main(int argc, char* argr[])
     }
     fprintf(stdout, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 
-    draw(v);
+    Draw(v);
 
 
-    app.run();
+    app.Run();
 
 	return 0;
 }

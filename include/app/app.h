@@ -14,15 +14,15 @@ namespace App {
             SDL_Quit();
         }
         
-        void update(double dt) {
+        void Update(double dt) {
             std::cout << "Update: " << dt << std::endl;
         }
 
-        void render() {
+        void Render() {
             std::cout << "Render" << std::endl;
         }
 
-        void loop() 
+        void Loop() 
         {
             double previous = SDL_GetTicks();
             double lag = 0.0;
@@ -42,7 +42,7 @@ namespace App {
 
                 SDL_PollEvent(&event);
                 if (event.type == SDL_QUIT) {
-                    this->stop();
+                    this->Stop();
                     break;
                 }
 
@@ -50,27 +50,27 @@ namespace App {
                 {
                     // Update here
                     lag -= MS_PER_UPDATE;
-                    update(lag / 100);
+                    Update(lag / 100);
                 }
 
                 // Render here
                 glClearColor(0.0,0.5,0.5,1);
                 glClear(GL_COLOR_BUFFER_BIT);
 
-                //render();
-                shader.use();
+                //Render();
+                shader.Use();
                 glDrawArrays(GL_TRIANGLES, 0, 3);
 
 
-                SDL_GL_SwapWindow(m_window.getWindow());
+                SDL_GL_SwapWindow(m_window.GetWindow());
             }
         }
         
-        void run(){
-            this->loop();
+        void Run(){
+            this->Loop();
         }
 
-        void stop(){
+        void Stop(){
             this->m_isRunning = false;
         }
 

@@ -36,7 +36,7 @@ namespace App {
             SDL_DestroyWindow(m_window);
         }
 
-        SDL_Window* getWindow() const {
+        SDL_Window* GetWindow() const {
             return m_window;
         }
 
