@@ -27,8 +27,16 @@ void Draw(const std::vector<float>& verticies) {
 
     glBufferData(GL_ARRAY_BUFFER, sizeof(float) * verticies.size(), verticies.data(), GL_STATIC_DRAW );
 
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+    glEnableVertexAttribArray(0); // Turn attrib 0 on
+    // 6 verticies in total. 3 are positions, 3 are colours.
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, (void*)0);
+
+    glEnableVertexAttribArray(1); // Turn attrib 1 on
+    // Same as attrib 0 but we need to jump 12 bytes (3 * float) to get to
+    // the colour attribs. Then every six verts is our next colour.
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, (void*)12);
+
+    glBindVertexArray(0);
 }
 
 int main(int argc, char* argr[])
@@ -37,9 +45,9 @@ int main(int argc, char* argr[])
     App::App app(800, 600, "Window Title");
 
     std::vector<float> v = {
-        -0.5f, -0.5f, 0.0f,
-         0.5f, -0.5f, 0.0f,
-         0.0f,  0.5f, 0.0f
+        -0.5f, -0.5f, 0.0f, 1.0f, 0.f, 0.0f, // 3x vertex, 3x colour
+         0.5f, -0.5f, 0.0f, 0.0f, 1.f, 0.0f,
+         0.0f,  0.5f, 0.0f, 0.0f,0.0f,1.0f
     };
 
     GLenum err = glewInit();
