@@ -24,7 +24,6 @@ namespace App {
 
         void loop() 
         {
-            const int MS_PER_UPDATE = 30;
             double previous = SDL_GetTicks();
             double lag = 0.0;
 
@@ -78,6 +77,7 @@ namespace App {
         private:
             Window m_window;
             bool m_isRunning = true;
+            static const int MS_PER_UPDATE = 60;
     };
 }
 
