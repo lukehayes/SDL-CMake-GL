@@ -15,11 +15,11 @@ namespace App {
         }
         
         void Update(double dt) {
-            std::cout << "Update: " << dt << std::endl;
+            //std::cout << "Update: " << dt << std::endl;
         }
 
         void Render() {
-            std::cout << "Render" << std::endl;
+            //std::cout << "Render" << std::endl;
         }
 
         void Loop() 
@@ -54,7 +54,7 @@ namespace App {
                 }
 
                 // Render here
-                glClearColor(0.4,0.5,0.5,1);
+                glClearColor(0.0,0.2,0.5,1);
                 glClear(GL_COLOR_BUFFER_BIT);
 
                 //Render();
