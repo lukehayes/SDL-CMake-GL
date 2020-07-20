@@ -8,6 +8,7 @@
 #endif
 
 #include <iostream>
+#include <iterator>
 #include <vector>
 #include "SDL.h"
 #include "app/app.h"
@@ -45,7 +46,7 @@ void Draw(const std::vector<float>& verticies, const std::vector<unsigned int>& 
 
 }
 
-int main(int argc, char* argr[])
+int main(int argc, char* argv[])
 {
 
     App::App app(800, 600, "Window Title");
@@ -70,10 +71,15 @@ int main(int argc, char* argr[])
     }
     fprintf(stdout, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 
+    if( argc > 1 ) {
+
+        if(std::string(argv[1]) == "-wf") {
+            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+            std::cout << "Enabled: Wireframe Mode" << std::endl;
+        }
+    }
+
     Draw(v, i);
-
-    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
 
     app.Run();
 
