@@ -59,7 +59,7 @@ namespace App {
 
                 //Render();
                 shader.Use();
-                glDrawArrays(GL_TRIANGLES, 0, 3);
+                glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 
                 SDL_GL_SwapWindow(m_window.GetWindow());
