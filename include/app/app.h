@@ -54,7 +54,7 @@ namespace App {
                 }
 
                 // Render here
-                glClearColor(0.0,0.5,0.5,1);
+                glClearColor(0.4,0.5,0.5,1);
                 glClear(GL_COLOR_BUFFER_BIT);
 
                 //Render();

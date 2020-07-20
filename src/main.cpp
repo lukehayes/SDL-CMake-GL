@@ -36,7 +36,7 @@ void Draw(const std::vector<float>& verticies, const std::vector<unsigned int>& 
     glEnableVertexAttribArray(1); // Turn attrib 1 on
     // Same as attrib 0 but we need to jump 12 bytes (3 * float) to get to
     // the colour attribs. Then every six verts is our next colour.
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, (void*)12);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, (void*)(3 * sizeof(float)));
 
     glGenBuffers(1, &EBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
@@ -51,9 +51,10 @@ int main(int argc, char* argr[])
     App::App app(800, 600, "Window Title");
 
     std::vector<float> v = {
-        -0.5f, -0.5f, 0.0f, 1.0f, 0.f, 0.0f, // 3x vertex, 3x colour
-         0.5f, -0.5f, 0.0f, 0.0f, 1.f, 0.0f,
-         0.0f,  0.5f, 0.0f, 0.0f,0.0f,1.0f
+         0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 0.0f,  // top right
+         0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,// bottom right
+        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f,  // bottom left
+        -0.5f,  0.5f, 0.0f, 0.3, 0.4f, 0.0f// top left
     };
 
     std::vector<unsigned int> i = {
@@ -70,6 +71,8 @@ int main(int argc, char* argr[])
     fprintf(stdout, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 
     Draw(v, i);
+
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 
     app.Run();
