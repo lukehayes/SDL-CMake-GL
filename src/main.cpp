@@ -41,6 +41,9 @@ void Draw(const std::vector<float>& verticies, const std::vector<unsigned int>& 
     // the colour attribs. Then every six verts is our next colour.
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, (void*)(3 * sizeof(float)));
 
+glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+glEnableVertexAttribArray(2);  
+
     glGenBuffers(1, &EBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * indicies.size(), indicies.data(), GL_STATIC_DRAW );
@@ -54,10 +57,10 @@ int main(int argc, char* argv[])
     App::App app(800, 600, "Window Title");
 
     std::vector<float> v = {
-         0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 0.0f,  // top right
-         0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,// bottom right
-        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f,  // bottom left
-        -0.5f,  0.5f, 0.0f, 0.3, 0.4f, 0.0f// top left
+         0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 0.0f,1.0f, 1.0f,  // top right
+         0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,// bottom right
+        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,// bottom left
+        -0.5f,  0.5f, 0.0f, 0.3, 0.4f, 0.0f, 0.0f, 1.0f// top left
     };
 
     std::vector<unsigned int> i = {
@@ -80,6 +83,26 @@ int main(int argc, char* argv[])
             std::cout << "Enabled: Wireframe Mode" << std::endl;
         }
     }
+
+
+    unsigned int texture;
+    glGenTextures(1, &texture); 
+
+    int width, height, nrChannels;
+    unsigned char *data = stbi_load("../assets/images/container.jpg", &width, &height, &nrChannels, 0);
+    std::cout << width << " " << height << std::endl;
+
+    glBindTexture(GL_TEXTURE_2D, texture); 
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+    glGenerateMipmap(GL_TEXTURE_2D);
+
+    stbi_image_free(data);
 
     Draw(v, i);
 
