@@ -14,6 +14,7 @@ SET(LIBS_DIR "${PROJECT_SOURCE_DIR}/deps/libs")
 SET(CORE_INCLUDES
 	"${PROJECT_SOURCE_DIR}/include"
 	"${PROJECT_SOURCE_DIR}/deps/libs/glm"
+	"${PROJECT_SOURCE_DIR}/deps/libs/stb"
 )
 
 # ------------------------------------------------------
@@ -60,6 +61,7 @@ if(APPLE OR UNIX)
 		${PROJECT_SOURCE_DIR}/include
 		${SDL2_INCLUDE_DIR}
         ${OPENGL_INCLUDE_DIR}
+        "${PROJECT_SOURCE_DIR}/deps/libs/stb" # Load stb_image.h header
     )
 
     # Add source to this project's executable.
