@@ -14,6 +14,8 @@
 #include "app/app.h"
 #include "GL/shader.h"
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
 void Draw(const std::vector<float>& verticies, const std::vector<unsigned int>& indicies) {
 
