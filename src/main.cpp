@@ -15,6 +15,7 @@
 #include "GL/shader.h"
 
 #define STB_IMAGE_IMPLEMENTATION
+#define STBI_ONLY_PNG
 #include "stb_image.h"
 
 void Draw(const std::vector<float>& verticies, const std::vector<unsigned int>& indicies) {
@@ -57,7 +58,7 @@ void LoadTexture(const char* image_path) {
     glGenTextures(1, &texture); 
 
     int width, height, nrChannels;
-    unsigned char *data = stbi_load(image_path, &width, &height, &nrChannels, 0);
+    unsigned char *data = stbi_load(image_path, &width, &height, &nrChannels, STBI_rgb_alpha);
     std::cout << width << " " << height << std::endl;
 
     glBindTexture(GL_TEXTURE_2D, texture); 
@@ -67,7 +68,7 @@ void LoadTexture(const char* image_path) {
     //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
     glGenerateMipmap(GL_TEXTURE_2D);
 
     stbi_image_free(data);
@@ -107,7 +108,7 @@ int main(int argc, char* argv[])
         }
     }
 
-    LoadTexture("../assets/images/container.jpg");
+    LoadTexture("../assets/images/doge.png");
     Draw(v, i);
 
     app.Run();
