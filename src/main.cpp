@@ -13,6 +13,7 @@
 #include "SDL.h"
 #include "app/app.h"
 #include "GL/shader.h"
+#include "platform/resource.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #define STBI_ONLY_PNG
@@ -59,7 +60,6 @@ void LoadTexture(const char* image_path) {
 
     int width, height, nrChannels;
     unsigned char *data = stbi_load(image_path, &width, &height, &nrChannels, STBI_rgb_alpha);
-    std::cout << width << " " << height << std::endl;
 
     glBindTexture(GL_TEXTURE_2D, texture); 
     
@@ -111,8 +111,9 @@ int main(int argc, char* argv[])
             std::cout << "Enabled: Wireframe Mode" << std::endl;
         }
     }
-
-    LoadTexture("../assets/images/doge.png");
+    
+    const char* image = ImageResource("doge.png").c_str();
+    LoadTexture(image);
     Draw(v, i);
 
     app.Run();
