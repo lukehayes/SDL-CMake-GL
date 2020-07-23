@@ -112,8 +112,8 @@ int main(int argc, char* argv[])
         }
     }
     
-    const char* image = ImageResource("doge.png").c_str();
-    LoadTexture(image);
+    std::string image = ImageResource("doge.png");
+    LoadTexture(image.c_str());
     Draw(v, i);
 
     app.Run();
