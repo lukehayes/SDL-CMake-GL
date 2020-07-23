@@ -28,9 +28,9 @@
      *
      * @return The full path to the image resource
      */
-    void ImageResource() {
-        std::cout << "Running on Windows. ImageResource() function needs implementation!" << std::endl;
-        exit(EXIT_FAILURE);
+    std::string ImageResource(const std::string& filename) {
+        std::string path = "../../../res/images/" + filename;
+        return path;
     }
 
 #endif
