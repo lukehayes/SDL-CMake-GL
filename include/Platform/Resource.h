@@ -15,7 +15,7 @@
      * @return The full path to the image resource
      */
     std::string ImageResource(const std::string& filename) {
-        std::string path = "../assets/images/" + filename;
+        std::string path = "../res/images/" + filename;
         return path;
     }
 
