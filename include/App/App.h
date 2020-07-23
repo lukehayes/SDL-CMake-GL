@@ -27,7 +27,7 @@ namespace App {
             double previous = SDL_GetTicks();
             double lag = 0.0;
 
-            GL::Shader shader("../assets/shaders/v.glsl", "../assets/shaders/f.glsl");
+            GL::Shader shader("../res/shaders/v.glsl", "../res/shaders/f.glsl");
 
             SDL_Event event;
 
