@@ -11,9 +11,9 @@
 #include <iterator>
 #include <vector>
 #include "SDL.h"
-#include "app/app.h"
-#include "GL/shader.h"
-#include "platform/resource.h"
+#include "App/App.h"
+#include "GL/Shader.h"
+#include "Platform/Resource.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #define STBI_ONLY_PNG

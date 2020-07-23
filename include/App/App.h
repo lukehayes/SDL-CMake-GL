@@ -1,8 +1,8 @@
 #ifndef APP_H
 #define APP_H
 
-#include "app/window.h"
-#include "GL/shader.h"
+#include "App/Window.h"
+#include "GL/Shader.h"
 
 namespace App {
 
