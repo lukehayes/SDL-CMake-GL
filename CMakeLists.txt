@@ -32,12 +32,15 @@ if (WIN32)
 
     include_directories(${INC_DIRS})
     link_directories(${PROJECT_SOURCE_DIR}/deps/libs/SDL/libs)
+    link_directories(${PROJECT_SOURCE_DIR}/deps/libs/GLEW/libs)
 
     # Add source to this project's executable.
     add_executable (app "${SRC_FILE}")
 
     target_link_libraries(app SDL2.lib)
     target_link_libraries(app SDL2main.lib)
+    target_link_libraries(app glew32)
+    target_link_libraries(app opengl32)
 
 endif(WIN32)
 

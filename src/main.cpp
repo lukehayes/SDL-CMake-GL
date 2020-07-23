@@ -1,6 +1,4 @@
 ﻿#if _WIN32
-    #define GLEW_STATIC
-    #include "eglew.h"
     #include "glew.h"
 
 #elif __linux__
