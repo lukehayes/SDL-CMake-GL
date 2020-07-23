@@ -20,12 +20,14 @@ namespace GL {
             }
             ~Texture(){}
 
-            void Load(const std::string& texturePath) {
+            void Load(const std::string& texturePath) { 
+
+                const std::string imageTexture = ImageResource(texturePath);
 
                 glGenTextures(1, &m_textureID); 
 
                 int width, height, nrChannels;
-                unsigned char *data = stbi_load(ImageResource(texturePath).c_str(), &width, &height, &nrChannels, STBI_rgb_alpha);
+                unsigned char *data = stbi_load(imageTexture.c_str(), &width, &height, &nrChannels, STBI_rgb_alpha);
 
                 glBindTexture(GL_TEXTURE_2D, m_textureID); 
                 
