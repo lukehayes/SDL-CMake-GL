@@ -8,42 +8,12 @@
 #endif
 
 #include <iostream>
-#include <iterator>
 #include <vector>
 #include "SDL.h"
 #include "App/App.h"
-#include "GL/Shader.h"
+#include "GL/Texture.h"
 #include "GL/RawBuffer.h"
-#include "Platform/Resource.h"
 
-#define STB_IMAGE_IMPLEMENTATION
-#define STBI_ONLY_PNG
-#include "stb_image.h"
-
-void LoadTexture(const char* image_path) {
-
-    unsigned int texture;
-    glGenTextures(1, &texture); 
-
-    int width, height, nrChannels;
-    unsigned char *data = stbi_load(image_path, &width, &height, &nrChannels, STBI_rgb_alpha);
-
-    glBindTexture(GL_TEXTURE_2D, texture); 
-    
-    // Texture filtering, mipmaps etc.
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    
-    // Must use RGBA for png!
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-    glGenerateMipmap(GL_TEXTURE_2D);
-
-    stbi_image_free(data);
-}
 
 int main(int argc, char* argv[])
 {
@@ -80,9 +50,7 @@ int main(int argc, char* argv[])
         }
     }
     
-    std::string image = ImageResource("doge.png");
-    LoadTexture(image.c_str());
-
+    GL::Texture t1("doge.png");
     GL::RawBuffer rb(v,i);
 
     app.Run();
