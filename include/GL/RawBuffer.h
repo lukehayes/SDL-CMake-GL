@@ -2,6 +2,7 @@
 #define RAW_BUFFER_H
 
 #include <vector>
+#include "GL/BufferTarget.h"
 
 namespace GL {
     
@@ -15,16 +16,23 @@ namespace GL {
                 this->Load(verticies, indicies);
             }
             ~RawBuffer(){}
+            
+            /**
+             * Generate and bind the classes VAO
+             */
+            void GenVertexArray() {
+                glGenVertexArrays(1, &m_VAO_ID);
+                glBindVertexArray(m_VAO_ID);
+            }
 
             void Load(const std::vector<float>& verticies, const std::vector<unsigned int>& indicies){
 
-                glGenVertexArrays(1, &m_VAO_ID);
-                glBindVertexArray(m_VAO_ID);
+                GenVertexArray();
 
                 glGenBuffers(1, &m_VBO_ID);
-                glBindBuffer(GL_ARRAY_BUFFER, m_VBO_ID);
+                glBindBuffer(GL::BufferTarget::ARRAY_BUFFER, m_VBO_ID);
 
-                glBufferData(GL_ARRAY_BUFFER, sizeof(float) * verticies.size(), verticies.data(), GL_STATIC_DRAW );
+                glBufferData(GL::BufferTarget::ARRAY_BUFFER, sizeof(float) * verticies.size(), verticies.data(), GL_STATIC_DRAW );
 
                 glEnableVertexAttribArray(0); // Turn attrib 0 on
                 // 6 verticies in total. 3 are positions, 3 are colours.
