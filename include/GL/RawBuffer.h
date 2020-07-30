@@ -18,15 +18,11 @@ namespace GL {
 
             void Load(const std::vector<float>& verticies, const std::vector<unsigned int>& indicies){
 
-                GLuint VAO;
-                GLuint VBO;
-                unsigned int EBO;
+                glGenVertexArrays(1, &m_VAO_ID);
+                glBindVertexArray(m_VAO_ID);
 
-                glGenVertexArrays(1, &VAO);
-                glBindVertexArray(VAO);
-
-                glGenBuffers(1, &VBO);
-                glBindBuffer(GL_ARRAY_BUFFER, VBO);
+                glGenBuffers(1, &m_VBO_ID);
+                glBindBuffer(GL_ARRAY_BUFFER, m_VBO_ID);
 
                 glBufferData(GL_ARRAY_BUFFER, sizeof(float) * verticies.size(), verticies.data(), GL_STATIC_DRAW );
 
@@ -42,11 +38,16 @@ namespace GL {
                 glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
                 glEnableVertexAttribArray(2);  
 
-                glGenBuffers(1, &EBO);
-                glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+                glGenBuffers(1, &m_EBO_ID);
+                glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO_ID);
                 glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * indicies.size(), indicies.data(), GL_STATIC_DRAW );
 
             }
+
+        private:
+            GLuint m_VAO_ID;
+            GLuint m_VBO_ID;
+            unsigned int m_EBO_ID;
     };
 
 }
