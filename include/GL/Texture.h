@@ -27,6 +27,7 @@ namespace GL {
                 glGenTextures(1, &m_textureID); 
 
                 int width, height, nrChannels;
+                stbi_set_flip_vertically_on_load(true); // Flips PNG to correct orientation
                 unsigned char *data = stbi_load(imageTexture.c_str(), &width, &height, &nrChannels, STBI_rgb_alpha);
 
                 glBindTexture(GL_TEXTURE_2D, m_textureID); 
