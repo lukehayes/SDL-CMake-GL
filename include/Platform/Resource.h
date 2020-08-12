@@ -1,3 +1,9 @@
+#ifndef RESOURCE_H
+#define RESOURCE_H
+
+
+
+
 /**
  * Platform specific helper functions to get resources like images.
  */
@@ -19,6 +25,18 @@
         return path;
     }
 
+    /**
+     * Get the path to an shader resource.
+     *
+     * @param filename The name of the file to load
+     *
+     * @return The full path to the shader file
+     */
+    std::string ShaderResource(const std::string& filename) {
+        std::string path = "../res/shaders/" + filename;
+        return path;
+    }
+
 #elif _WIN32
 
     /**
@@ -33,4 +51,18 @@
         return path;
     }
 
+    /**
+     * Get the path to an shader resource.
+     *
+     * @param filename The name of the file to load
+     *
+     * @return The full path to the shader file
+     */
+    std::string ShaderResource(const std::string& filename) {
+        std::string path = "../../../res/shaders/" + filename;
+        return path;
+    }
+
 #endif
+
+#endif // !RESOURCE_H

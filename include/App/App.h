@@ -3,6 +3,7 @@
 
 #include "App/Window.h"
 #include "GL/Shader.h"
+#include "Platform/Resource.h"
 
 namespace App {
 
@@ -27,7 +28,10 @@ namespace App {
             double previous = SDL_GetTicks();
             double lag = 0.0;
 
-            GL::Shader shader("../res/shaders/v.glsl", "../res/shaders/f.glsl");
+            const std::string vshPath = ShaderResource("v.glsl");
+            const std::string fshPath = ShaderResource("f.glsl");
+
+            GL::Shader shader(vshPath.c_str(), fshPath.c_str());
 
             SDL_Event event;
 
