@@ -12,12 +12,11 @@
 #include "GL/Texture.h"
 #include "GL/RawBuffer.h"
 
-
 int main(int argc, char* argv[])
 {
 
     App::App app(800, 600, "Window Title");
-
+    
 
     std::vector<float> v = {
    // positions          // colors           // texture coords

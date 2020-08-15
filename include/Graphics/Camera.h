@@ -18,7 +18,7 @@ namespace Graphics {
 		*/
 		void Setup() {
 			m_projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
-			m_view = glm::translate(m_view, glm::vec3(0.0f, 0.0f, -3.0f));
+			m_view = glm::translate(m_view, m_position);
 		}
 
 		glm::mat4 GetCombinedProjection() {

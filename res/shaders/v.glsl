@@ -6,9 +6,11 @@ layout (location = 2) in vec2 vtxTexCoord;
 out vec4 vertexColor;
 out vec2 TexCoord;
 
+uniform mat4 projection;
+
 void main()
 {
-    gl_Position = vec4(vtxPosition, 1.0);
+    gl_Position = projection * vec4(vtxPosition, 1.0);
     vertexColor = vec4(vtxColor, 1.0); 
     TexCoord = vtxTexCoord;
 }

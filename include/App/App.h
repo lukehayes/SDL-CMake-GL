@@ -4,6 +4,7 @@
 #include "App/Window.h"
 #include "GL/Shader.h"
 #include "Platform/Resource.h"
+#include "Graphics/Camera.h"
 
 namespace App {
 
@@ -33,6 +34,13 @@ namespace App {
 
             GL::Shader shader(vshPath.c_str(), fshPath.c_str());
 
+            Graphics::Camera cam;
+            cam.Setup();
+
+            shader.SetMat4("projection", cam.GetCombinedProjection());
+
+            float counter = 0.0f;
+
             SDL_Event event;
 
             while (true) 
@@ -42,6 +50,14 @@ namespace App {
                 previous = current;
                 lag += elapsed;
 
+                std::cout << counter << std::endl;
+
+                counter += 0.01;
+                cam.m_position.z = std::sin(counter) * 10.0;
+
+
+				shader.SetMat4("projection", cam.GetCombinedProjection());
+				cam.Setup();
                 // processInput();
 
                 SDL_PollEvent(&event);

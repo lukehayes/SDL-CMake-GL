@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include "Util/glm.h"
 
 namespace GL {
     
@@ -89,6 +90,11 @@ namespace GL {
         void SetFloat(const std::string &name, float value) const
         { 
             glUniform1f(glGetUniformLocation(ID, name.c_str()), value); 
+        }
+        // ------------------------------------------------------------------------
+        void SetMat4(const std::string& name, const glm::mat4& mat) const
+        {
+            glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
         }
 
     private:
