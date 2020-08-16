@@ -16,6 +16,9 @@ namespace Model {
         virtual ~BaseMesh(){}
     protected:
 
+        std::vector<float> m_verticies;
+        std::vector<unsigned int> m_indcies;
+
     };
 
     
