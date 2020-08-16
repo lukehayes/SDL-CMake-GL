@@ -53,6 +53,8 @@ namespace App {
                 std::cout << counter << std::endl;
 
                 counter += 0.01;
+                cam.m_position.x = std::cos(counter) * 10.0;
+                cam.m_position.y = std::sin(counter) * 10.0;
                 cam.m_position.z = std::sin(counter) * 10.0;
 
 
