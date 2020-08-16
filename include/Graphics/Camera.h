@@ -8,7 +8,7 @@ namespace Graphics {
 
 	class Camera {
 	public:
-		Camera() : m_position(0,0,-3.0)  {}
+		Camera() : m_position(0.0,0.0,-10.0f)  {}
 		Camera(const Camera& cam) {}
 		Camera(const glm::vec3& pos) : m_position(pos) {}
 		~Camera() {}
@@ -18,7 +18,7 @@ namespace Graphics {
 		*/
 		void Setup() {
 			m_projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
-			m_view = glm::translate(m_view, m_position);
+            m_view = glm::lookAt(m_position, glm::vec3(0.0f, 0.0f, 0.0f), m_up);
 		}
 
 		glm::mat4 GetCombinedProjection() {
@@ -30,6 +30,7 @@ namespace Graphics {
 		glm::vec3 m_position = glm::vec3(0.0f);
 		glm::mat4 m_projection = glm::mat4(1.0f);
 		glm::mat4 m_view =	glm::mat4(1.0f);
+        glm::vec3 m_up = glm::vec3(0.0f, 1.0f, 0.0f);
 	};
 }
 
