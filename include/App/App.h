@@ -5,6 +5,7 @@
 #include "GL/Shader.h"
 #include "Platform/Resource.h"
 #include "Graphics/Camera.h"
+#include "Model/Model.h"
 
 namespace App {
 
@@ -43,6 +44,12 @@ namespace App {
 
             SDL_Event event;
 
+            Model::Model model;
+
+            float n = 100.0f;
+            glm::vec3 position = glm::vec3(0.0, 0.0, 0.0);
+            model.GetMatrix() = glm::translate(model.GetMatrix(), model.m_position);
+
             while (true) 
             {
                 double current = SDL_GetTicks();
@@ -50,15 +57,17 @@ namespace App {
                 previous = current;
                 lag += elapsed;
 
-                std::cout << counter << std::endl;
+                //std::cout << position.x << " " << position.y << " " << position.z << std::endl;
 
-                counter += 0.01;
-                cam.m_position.x = std::cos(counter) * 10.0;
-                cam.m_position.y = std::sin(counter) * 10.0;
-                cam.m_position.z = std::sin(counter) * 10.0;
-
+                counter += 0.1;
+                model.m_position.x = std::cos(counter) / 1.0;
+                model.m_position.y = std::sin(counter) / 1.0;
+                model.m_position.z = std::sin(counter);
+                //model = glm::rotate(model, glm::radians(45.0f), glm::vec3(0, 0, 1));
+				model.GetMatrix() = glm::translate(model.GetMatrix(), model.m_position);
 
 				shader.SetMat4("projection", cam.GetCombinedProjection());
+                shader.SetMat4("model", model.GetMatrix());
 				cam.Setup();
                 // processInput();
 
@@ -80,8 +89,8 @@ namespace App {
                 glClear(GL_COLOR_BUFFER_BIT);
 
                 //Render();
-                shader.Use();
-                glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+				shader.Use();
+				glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 
                 SDL_GL_SwapWindow(m_window.GetWindow());
