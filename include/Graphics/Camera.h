@@ -25,7 +25,10 @@ namespace Graphics {
 			return m_projection * m_view;
 		}
 
-		void Update(double dt) {}
+        void Update(double dt) 
+        {
+            m_view = glm::lookAt(m_position, glm::vec3(0.0f, 0.0f, 0.0f), m_up);
+        }
 
 		glm::vec3 m_position = glm::vec3(0.0f);
 		glm::mat4 m_projection = glm::mat4(1.0f);
