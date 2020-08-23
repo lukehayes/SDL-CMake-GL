@@ -47,8 +47,6 @@ namespace App {
             Model::Model model;
 
             float n = 100.0f;
-            glm::vec3 position = glm::vec3(0.0, 0.0, 0.0);
-            model.GetMatrix() = glm::translate(model.GetMatrix(), model.m_position);
 
             while (true) 
             {
@@ -60,15 +58,7 @@ namespace App {
                 //std::cout << position.x << " " << position.y << " " << position.z << std::endl;
 
                 counter += 0.1;
-                model.m_position.x = std::cos(counter) / 1.0;
-                model.m_position.y = std::sin(counter) / 1.0;
-                model.m_position.z = std::sin(counter);
-                //model = glm::rotate(model, glm::radians(45.0f), glm::vec3(0, 0, 1));
-				model.GetMatrix() = glm::translate(model.GetMatrix(), model.m_position);
 
-				shader.SetMat4("projection", cam.GetCombinedProjection());
-                shader.SetMat4("model", model.GetMatrix());
-				cam.Setup();
                 // processInput();
 
                 SDL_PollEvent(&event);
@@ -90,6 +80,17 @@ namespace App {
 
                 //Render();
 				shader.Use();
+				shader.SetMat4("projection", cam.GetCombinedProjection());
+                std::cout << model.m_position.x << std::endl;
+
+                model.m_position.x = std::cos(counter) * 2.0;
+                model.m_position.y = std::sin(counter) / 1.0;
+                model.m_position.z = std::sin(counter) * 10.0;
+
+                //model = glm::rotate(model, glm::radians(45.0f), glm::vec3(0, 0, 1));
+				model.GetMatrix() = glm::translate(model.GetMatrix(), model.m_position);
+
+                shader.SetMat4("model", model.GetMatrix());
 				glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 
