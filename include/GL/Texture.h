@@ -47,6 +47,11 @@ namespace GL {
                 stbi_image_free(data);
             }
 
+            void Bind()
+            {
+                glBindTexture(GL_TEXTURE_2D, m_textureID); 
+            }
+
             inline GLuint getTextureID() const {
                 return m_textureID;
             }
