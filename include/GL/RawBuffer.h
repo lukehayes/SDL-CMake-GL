@@ -12,9 +12,8 @@ namespace GL {
     class RawBuffer
     {
         public:
-            RawBuffer(const std::vector<float>& verticies, const std::vector<unsigned int>& indicies, int vertexCount) {
+            RawBuffer(const std::vector<float>& verticies, const std::vector<unsigned int>& indicies) {
                 this->Load(verticies, indicies);
-                m_vertexCount = vertexCount;
             }
             ~RawBuffer(){}
             
@@ -57,7 +56,6 @@ namespace GL {
             GLuint m_VAO_ID;
             GLuint m_VBO_ID;
             unsigned int m_EBO_ID;
-            int m_vertexCount;
     };
 
 }

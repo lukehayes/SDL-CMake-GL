@@ -1,8 +1,8 @@
-#ifndef MODEL_BASE_MESH_H
+#ifdef MODEL_BASE_MESH_H
 #define MODEL_BASE_MESH_H
 
 #include <vector>
-#include "Util/glm.h"
+
 
 namespace Model {
 
@@ -13,8 +13,6 @@ namespace Model {
     {
     public:
         BaseMesh() {}
-        BaseMesh(const std::vector<float> vertices, const std::vector<unsigned int> indicies)
-        : m_verticies(vertices), m_indcies(indicies) {}
         virtual ~BaseMesh(){}
     protected:
 

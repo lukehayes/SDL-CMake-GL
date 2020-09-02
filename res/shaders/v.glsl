@@ -7,11 +7,10 @@ out vec4 vertexColor;
 out vec2 TexCoord;
 
 uniform mat4 projection;
-uniform mat4 model;
 
 void main()
 {
-    gl_Position = projection * model * vec4(vtxPosition, 1.0);
+    gl_Position = projection * vec4(vtxPosition, 1.0);
     vertexColor = vec4(vtxColor, 1.0); 
     TexCoord = vtxTexCoord;
 }
