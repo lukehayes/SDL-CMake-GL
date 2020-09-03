@@ -8,7 +8,7 @@ namespace Model {
 	class Model
 	{
 	public:
-		Model() : m_position(0,0,0){}
+		Model() : m_position(0,0,0), m_vertexCount(6) {}
 		Model(const glm::vec3 &position) : m_position(position) {}
 		~Model() {}
 
@@ -18,6 +18,7 @@ namespace Model {
 		}
 
 		glm::vec3 m_position = glm::vec3(1.0f);
+		int m_vertexCount = 6;
 
 	private:
 		glm::mat4 m_model_matrix = glm::mat4(1.0f);
