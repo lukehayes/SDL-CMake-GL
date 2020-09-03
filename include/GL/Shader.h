@@ -71,7 +71,7 @@ namespace GL {
         }
         // activate the shader
         // ------------------------------------------------------------------------
-        void Use() 
+        void Use() const
         { 
             glUseProgram(ID); 
         }
