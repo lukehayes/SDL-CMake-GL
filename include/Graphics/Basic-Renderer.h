@@ -11,6 +11,7 @@ namespace Graphics {
 	class BasicRenderer {
 	public:
 		BasicRenderer() {}
+		BasicRenderer(const Model::Model& model) : m_model(model){}
 		BasicRenderer(const RawBuffer& buffer, const Model::Model model)
 			: m_rawBuffer(buffer), m_model(model) {}
 		~BasicRenderer() {}
