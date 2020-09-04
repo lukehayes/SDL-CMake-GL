@@ -5,6 +5,7 @@
 #include "GL/Shader.h"
 #include "Platform/Resource.h"
 #include "Graphics/Camera.h"
+#include "Model/Model.h"
 
 namespace App {
 
@@ -29,13 +30,15 @@ namespace App {
             double previous = SDL_GetTicks();
             double lag = 0.0;
 
-            const std::string vshPath = ShaderResource("v.glsl");
-            const std::string fshPath = ShaderResource("f.glsl");
+            const std::string vshPath = ShaderResource("default-vsh.glsl");
+            const std::string fshPath = ShaderResource("default-fsh.glsl");
 
             GL::Shader shader(vshPath.c_str(), fshPath.c_str());
 
             Graphics::Camera cam;
             cam.Setup();
+
+            Model::Model model;
 
             shader.SetMat4("projection", cam.GetCombinedProjection());
 
@@ -55,12 +58,13 @@ namespace App {
                 counter += 0.01;
                 cam.m_position.x = std::cos(counter) * 10.0;
                 cam.m_position.y = std::sin(counter) * 10.0;
-                cam.m_position.z = std::sin(counter) * 10.0;
 
 
 				shader.SetMat4("projection", cam.GetCombinedProjection());
 				cam.Setup();
                 // processInput();
+
+				shader.SetMat4("model", model.GetMatrix() );
 
                 SDL_PollEvent(&event);
                 if (event.type == SDL_QUIT) {
@@ -81,7 +85,7 @@ namespace App {
 
                 //Render();
                 shader.Use();
-                glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+                glDrawElements(GL_TRIANGLES, model.m_vertexCount, GL_UNSIGNED_INT, 0);
 
 
                 SDL_GL_SwapWindow(m_window.GetWindow());

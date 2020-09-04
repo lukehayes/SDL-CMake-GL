@@ -1,8 +1,7 @@
-#ifdef MODEL_BASE_MESH_H
+#ifndef MODEL_BASE_MESH_H
 #define MODEL_BASE_MESH_H
 
 #include <vector>
-
 
 namespace Model {
 
@@ -14,16 +13,13 @@ namespace Model {
     public:
         BaseMesh() {}
         virtual ~BaseMesh(){}
-    protected:
 
+    protected:
         std::vector<float> m_verticies;
         std::vector<unsigned int> m_indcies;
 
     };
 
-    
 } /* namespace Model */
-
-
 
 #endif

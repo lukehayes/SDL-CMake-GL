@@ -1,22 +1,16 @@
-﻿#if _WIN32
-    #include "glew.h"
-
-#elif __linux__
-    #include "GL/glew.h"
-#endif
-
+﻿#include "Util\GL.h"
 #include <iostream>
 #include <vector>
 #include "SDL.h"
 #include "App/App.h"
 #include "GL/Texture.h"
 #include "GL/RawBuffer.h"
+#include "Graphics/Basic-Renderer.h"
 
 int main(int argc, char* argv[])
 {
 
     App::App app(800, 600, "Window Title");
-    
 
     std::vector<float> v = {
    // positions          // colors           // texture coords
@@ -51,11 +45,11 @@ int main(int argc, char* argv[])
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
-    GL::Texture t1("doge.png");
+    //GL::Texture t1("doge.png");
     GL::RawBuffer rb(v,i);
 
     app.Run();
 
 	return 0;
 }
-
+ 
