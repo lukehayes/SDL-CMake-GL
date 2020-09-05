@@ -8,7 +8,7 @@ namespace Graphics {
 
 	class Camera {
 	public:
-		Camera() : m_position(0.0,0.0,-10.0f)  {}
+		Camera() : m_position(0.0,0.0,-3.0f)  {}
 		Camera(const Camera& cam) {}
 		Camera(const glm::vec3& pos) : m_position(pos) {}
 		~Camera() {}
