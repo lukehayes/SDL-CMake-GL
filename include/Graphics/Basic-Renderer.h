@@ -19,8 +19,16 @@ namespace Graphics {
 
 		BasicRenderer(const Model::Model& model) : m_model(model){}
 
-		BasicRenderer(const GL::RawBuffer buffer, const Model::Model model, const GL::Shader& shader, const Graphics::Camera& cam)
-			: m_rawBuffer(buffer), m_model(model), m_shader(ShaderResource("default-vsh.glsl").c_str(), ShaderResource("default-fsh.glsl").c_str()), m_camera(cam) {}
+		BasicRenderer(const GL::RawBuffer buffer, const GL::Shader& shader, const Graphics::Camera& cam, const Model::Model& model)
+			: m_rawBuffer(buffer), 
+			m_shader(ShaderResource("default-vsh.glsl").c_str(),
+			ShaderResource("default-fsh.glsl").c_str()), 
+			m_camera(cam),
+			m_model(model) {}
+
+
+		BasicRenderer(const GL::RawBuffer buffer, const GL::Shader& shader, const Graphics::Camera& cam)
+			: m_rawBuffer(buffer), m_shader(ShaderResource("default-vsh.glsl").c_str(), ShaderResource("default-fsh.glsl").c_str()), m_camera(cam) {}
 
 		~BasicRenderer() {}
 
@@ -45,9 +53,9 @@ namespace Graphics {
 
 	private:
 		GL::RawBuffer m_rawBuffer;
-		Model::Model m_model;
 		GL::Shader m_shader;
 		Graphics::Camera m_camera;
+		Model::Model m_model;
 	};
 }
 
