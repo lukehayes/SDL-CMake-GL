@@ -12,6 +12,9 @@ namespace GL {
     class RawBuffer
     {
         public:
+
+            RawBuffer(){}
+
             RawBuffer(const std::vector<float>& verticies, const std::vector<unsigned int>& indicies) {
                 this->Load(verticies, indicies);
             }
