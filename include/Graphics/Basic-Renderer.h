@@ -19,7 +19,7 @@ namespace Graphics {
 
 		BasicRenderer(const Model::Model& model) : m_model(model){}
 
-		BasicRenderer(const GL::RawBuffer buffer, const GL::Shader& shader, const Graphics::Camera& cam, const Model::Model& model)
+		BasicRenderer(const GL::RawBuffer& buffer, const GL::Shader& shader, const Graphics::Camera& cam, const Model::Model& model)
 			: m_rawBuffer(buffer), 
 			m_shader(ShaderResource("default-vsh.glsl").c_str(),
 			ShaderResource("default-fsh.glsl").c_str()), 
@@ -48,10 +48,13 @@ namespace Graphics {
 		void Render()
 		{
 			m_shader.Use();
+
+			glClearColor(1.0,0.2,0.5,1);
+			glClear(GL_COLOR_BUFFER_BIT);
+
 			glDrawElements(GL_TRIANGLES, m_model.m_vertexCount, GL_UNSIGNED_INT, 0);
 		}
 
-	private:
 		GL::RawBuffer m_rawBuffer;
 		GL::Shader m_shader;
 		Graphics::Camera m_camera;
