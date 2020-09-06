@@ -6,6 +6,7 @@
 #include "GL/Texture.h"
 #include "GL/RawBuffer.h"
 #include "Graphics/Basic-Renderer.h"
+#include "Graphics/Camera.h"
 
 int main(int argc, char* argv[])
 {
@@ -46,7 +47,23 @@ int main(int argc, char* argv[])
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
     //GL::Texture t1("doge.png");
-    GL::RawBuffer rb(v,i);
+    const GL::RawBuffer buffer(v,i);
+
+	const std::string vshPath = ShaderResource("default-vsh.glsl");
+	const std::string fshPath = ShaderResource("default-fsh.glsl");
+	GL::Shader shader(vshPath.c_str(), fshPath.c_str());
+
+    Model::Model model(glm::vec3(0.2, 0.0, 0.0));
+
+	Graphics::Camera camera;
+    camera.Setup();
+
+    shader.SetMat4("projection", camera.GetCombinedProjection());
+    shader.SetMat4("model", model.GetMatrix());
+
+    Graphics::BasicRenderer renderer(buffer, shader, camera, model);
+
+    app.SetRenderer(&renderer);
 
     app.Run();
 
