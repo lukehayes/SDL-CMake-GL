@@ -5,6 +5,7 @@
 #include "GL/Shader.h"
 #include "Platform/Resource.h"
 #include "Graphics/Camera.h"
+#include "Graphics/Basic-Renderer.h"
 #include "Model/Model.h"
 
 namespace App {
@@ -30,18 +31,6 @@ namespace App {
             double previous = SDL_GetTicks();
             double lag = 0.0;
 
-            const std::string vshPath = ShaderResource("default-vsh.glsl");
-            const std::string fshPath = ShaderResource("default-fsh.glsl");
-
-            GL::Shader shader(vshPath.c_str(), fshPath.c_str());
-
-            Graphics::Camera cam;
-            cam.Setup();
-
-            Model::Model model;
-
-            shader.SetMat4("projection", cam.GetCombinedProjection());
-
             float counter = 0.0f;
 
             SDL_Event event;
@@ -53,18 +42,14 @@ namespace App {
                 previous = current;
                 lag += elapsed;
 
-                std::cout << counter << std::endl;
+				m_renderer->m_shader.SetMat4("projection", m_renderer->m_camera.GetCombinedProjection());
+				m_renderer->m_shader.SetMat4("model", m_renderer->m_model.GetMatrix());
 
-                counter += 0.01;
-                cam.m_position.x = std::cos(counter) * 10.0;
-                cam.m_position.y = std::sin(counter) * 10.0;
+				//shader.SetMat4("projection", cam.GetCombinedProjection());
+				//cam.Setup();
+    //            // processInput();
 
-
-				shader.SetMat4("projection", cam.GetCombinedProjection());
-				cam.Setup();
-                // processInput();
-
-				shader.SetMat4("model", model.GetMatrix() );
+				//shader.SetMat4("model", model.GetMatrix() );
 
                 SDL_PollEvent(&event);
                 if (event.type == SDL_QUIT) {
@@ -80,12 +65,14 @@ namespace App {
                 }
 
                 // Render here
-                glClearColor(0.0,0.2,0.5,1);
-                glClear(GL_COLOR_BUFFER_BIT);
+                //glClearColor(0.0,0.2,0.5,1);
+                //glClear(GL_COLOR_BUFFER_BIT);
 
                 //Render();
-                shader.Use();
-                glDrawElements(GL_TRIANGLES, model.m_vertexCount, GL_UNSIGNED_INT, 0);
+                //shader.Use();
+                //glDrawElements(GL_TRIANGLES, model.m_vertexCount, GL_UNSIGNED_INT, 0);
+
+                m_renderer->Render();
 
 
                 SDL_GL_SwapWindow(m_window.GetWindow());
@@ -100,10 +87,17 @@ namespace App {
             this->m_isRunning = false;
         }
 
+        void SetRenderer(Graphics::BasicRenderer* renderer)
+        {
+            m_renderer = renderer;
+        }
+
         private:
             Window m_window;
             bool m_isRunning = true;
             static const int MS_PER_UPDATE = 60;
+
+            Graphics::BasicRenderer* m_renderer = nullptr;
     };
 }
 
