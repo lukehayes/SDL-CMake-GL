@@ -12,9 +12,9 @@ namespace Model {
 		Model(const glm::vec3 &position) : m_position(position) {}
 		~Model() {}
 
-		inline glm::mat4& GetMatrix()
+		inline glm::mat4 GetMatrix()
 		{
-			return m_model_matrix;
+			return glm::translate(m_model_matrix, m_position);
 		}
 
 		glm::vec3 m_position = glm::vec3(1.0f);
