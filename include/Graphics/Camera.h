@@ -22,8 +22,13 @@ namespace Graphics {
 		}
 
 		glm::mat4 GetCombinedProjection() {
-			return m_projection * m_view;
+			return glm::matrixCompMult(m_projection, m_view);
 		}
+
+        void LookAt(const glm::vec3& target)
+        {
+            m_view = glm::lookAt(m_position, target, m_up);
+        }
 
 		void Update(double dt) {}
 
