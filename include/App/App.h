@@ -45,12 +45,6 @@ namespace App {
 				m_renderer->m_shader.SetMat4("projection", m_renderer->m_camera.GetCombinedProjection());
 				m_renderer->m_shader.SetMat4("model", m_renderer->m_model.GetMatrix());
 
-				//shader.SetMat4("projection", cam.GetCombinedProjection());
-				//cam.Setup();
-    //            // processInput();
-
-				//shader.SetMat4("model", model.GetMatrix() );
-
                 SDL_PollEvent(&event);
                 if (event.type == SDL_QUIT) {
                     this->Stop();
@@ -64,16 +58,7 @@ namespace App {
                     Update(lag / 100);
                 }
 
-                // Render here
-                //glClearColor(0.0,0.2,0.5,1);
-                //glClear(GL_COLOR_BUFFER_BIT);
-
-                //Render();
-                //shader.Use();
-                //glDrawElements(GL_TRIANGLES, model.m_vertexCount, GL_UNSIGNED_INT, 0);
-
                 m_renderer->Render();
-
 
                 SDL_GL_SwapWindow(m_window.GetWindow());
             }
