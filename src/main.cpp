@@ -53,12 +53,9 @@ int main(int argc, char* argv[])
 	const std::string fshPath = ShaderResource("default-fsh.glsl");
 	GL::Shader shader(vshPath.c_str(), fshPath.c_str());
 
-    Model::Model model(glm::vec3(0.2, 0.0, 0.0));
+    Model::Model model;
 
 	Graphics::Camera camera;
-
-    shader.SetMat4("projection", camera.GetCombinedProjection());
-    shader.SetMat4("model", model.GetMatrix());
 
     Graphics::BasicRenderer renderer(buffer, shader, camera, model);
 
