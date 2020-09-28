@@ -30,6 +30,11 @@ namespace Graphics {
             m_view = glm::lookAt(m_position, m_target, m_up);
 		}
 
+        inline glm::mat4 GetViewMatrix() const
+        {
+            return this->m_view;
+        }
+
 		glm::mat4 GetCombinedProjection() {
 			return glm::matrixCompMult(m_projection, m_view);
 		}
