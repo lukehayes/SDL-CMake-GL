@@ -42,7 +42,8 @@ namespace App {
                 previous = current;
                 lag += elapsed;
 
-				m_renderer->m_shader.SetMat4("projection", m_renderer->m_camera.GetCombinedProjection());
+				m_renderer->m_shader.SetMat4("projection", m_renderer->m_camera.GetProjectionMatrix());
+				m_renderer->m_shader.SetMat4("view", m_renderer->m_camera.GetViewMatrix());
 				m_renderer->m_shader.SetMat4("model", m_renderer->m_model.GetMatrix());
 
                 SDL_PollEvent(&event);
