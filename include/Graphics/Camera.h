@@ -8,9 +8,18 @@ namespace Graphics {
 
 	class Camera {
 	public:
-		Camera() : m_position(0.0,0.0,-3.0f)  {}
+        Camera() : m_position(0.0,0.0,-3.0f)  
+        {
+            Setup();
+        }
+
 		Camera(const Camera& cam) {}
-		Camera(const glm::vec3& pos) : m_position(pos) {}
+
+		Camera(const glm::vec3& pos) : m_position(pos) 
+        {
+            Setup();
+        }
+
 		~Camera() {}
 		
 		/**
@@ -27,12 +36,15 @@ namespace Graphics {
 
         void LookAt(const glm::vec3& target)
         {
-            m_view = glm::lookAt(m_position, target, m_up);
+            this->m_view = glm::lookAt(m_position, target, m_up);
         }
 
-		void Update(double dt) {}
+        void Update(double dt) {
+            this->LookAt(m_position);
+        }
 
-		glm::vec3 m_position = glm::vec3(0.0f);
+
+		glm::vec3 m_position;
 		glm::mat4 m_projection = glm::mat4(1.0f);
 		glm::mat4 m_view =	glm::mat4(1.0f);
         glm::vec3 m_up = glm::vec3(0.0f, 1.0f, 0.0f);

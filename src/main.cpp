@@ -56,7 +56,6 @@ int main(int argc, char* argv[])
     Model::Model model(glm::vec3(0.2, 0.0, 0.0));
 
 	Graphics::Camera camera;
-    camera.Setup();
 
     shader.SetMat4("projection", camera.GetCombinedProjection());
     shader.SetMat4("model", model.GetMatrix());
