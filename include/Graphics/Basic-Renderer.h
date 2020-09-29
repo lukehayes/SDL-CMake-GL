@@ -50,7 +50,7 @@ namespace Graphics {
 			m_shader.Use();
 
 			glClearColor(1.0,0.2,0.5,1);
-			glClear(GL_COLOR_BUFFER_BIT);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			glDrawElements(GL_TRIANGLES, m_model.m_vertexCount, GL_UNSIGNED_INT, 0);
 		}
