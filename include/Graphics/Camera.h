@@ -51,9 +51,9 @@ namespace Graphics {
 			return glm::matrixCompMult(m_projection, m_view);
 		}
 
-        void LookAt(const glm::vec3& target)
+        void LookAt(const glm::vec3& position)
         {
-            this->m_view = glm::lookAt(m_position, target, m_up);
+            this->m_view = glm::lookAt(position, m_target, m_up);
         }
 
         void Update(double dt) {
