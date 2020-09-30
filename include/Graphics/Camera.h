@@ -13,7 +13,14 @@ namespace Graphics {
             Setup();
         }
 
-		Camera(const Camera& cam) {}
+		Camera(const Camera& cam) 
+        {
+            this->m_position = cam.m_position;
+            this->m_projection = cam.m_projection;
+            this->m_view = cam.m_view;
+            this->m_up = cam.m_up;
+            this->m_target = cam.m_target;
+        }
 
 		Camera(const glm::vec3& pos) : m_position(pos) 
         {
