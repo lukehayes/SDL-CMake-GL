@@ -8,7 +8,7 @@ namespace Model {
 	class Model
 	{
 	public:
-		Model() : m_position(0,0,-5.0), m_vertexCount(6) {}
+		Model() : m_position(0,0,5.0), m_vertexCount(6) {}
 		Model(const glm::vec3 &position) : m_position(position) {}
 		~Model() {}
 
