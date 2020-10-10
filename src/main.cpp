@@ -57,7 +57,7 @@ int main(int argc, char* argv[])
 
 	Graphics::Camera camera;
 
-    Graphics::BasicRenderer renderer(buffer, shader, camera, model);
+    Graphics::BasicRenderer renderer(buffer, shader, camera);
 
     app.SetRenderer(&renderer);
 

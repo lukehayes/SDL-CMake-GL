@@ -33,6 +33,10 @@ namespace App {
 
             float counter = 0.0f;
 
+            glm::mat4 modMat = glm::mat4(1.0f);
+            glm::vec3 pos = glm::vec3(0.0,0.0,15.0);
+            modMat = glm::translate(modMat, pos);
+
             SDL_Event event;
 
             while (true) 
@@ -42,9 +46,10 @@ namespace App {
                 previous = current;
                 lag += elapsed;
 
+
 				m_renderer->m_shader.SetMat4("projection", m_renderer->m_camera.GetProjectionMatrix());
 				m_renderer->m_shader.SetMat4("view", m_renderer->m_camera.GetViewMatrix());
-				m_renderer->m_shader.SetMat4("model", m_renderer->m_model.GetMatrix());
+				m_renderer->m_shader.SetMat4("model", modMat);
 
                 SDL_PollEvent(&event);
                 if (event.type == SDL_QUIT) {
