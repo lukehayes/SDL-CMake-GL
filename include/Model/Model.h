@@ -14,7 +14,7 @@ namespace Model {
 
         void SetPosition(glm::vec3 position)
         {
-			glm::translate(&this->m_model_matrix, position);
+			glm::translate(this->m_model_matrix, position);
         }
 
 		inline glm::mat4 GetMatrix()
