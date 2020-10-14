@@ -19,8 +19,7 @@ namespace Model {
 
 		inline glm::mat4 GetMatrix()
 		{
-			//return glm::translate(m_model_matrix, m_position);
-			return m_model_matrix;
+			return glm::translate(m_model_matrix, m_position);
 		}
 
 		glm::vec3 m_position;
