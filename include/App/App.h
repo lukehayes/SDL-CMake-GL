@@ -33,6 +33,8 @@ namespace App {
 
             float counter = 0.0f;
 
+            Model::Model model;
+
             SDL_Event event;
 
             while (true) 
@@ -44,7 +46,6 @@ namespace App {
 
 				m_renderer->m_shader.SetMat4("projection", m_renderer->m_camera.GetProjectionMatrix());
 				m_renderer->m_shader.SetMat4("view", m_renderer->m_camera.GetViewMatrix());
-				m_renderer->m_shader.SetMat4("model", m_renderer->m_model.GetMatrix());
 
                 SDL_PollEvent(&event);
                 if (event.type == SDL_QUIT) {
@@ -59,7 +60,7 @@ namespace App {
                     Update(lag / 100);
                 }
 
-                m_renderer->Render();
+                m_renderer->Render(model);
 
                 SDL_GL_SwapWindow(m_window.GetWindow());
             }
