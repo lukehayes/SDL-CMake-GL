@@ -35,6 +35,11 @@ namespace App {
 
             Model::Model model;
 
+            Graphics::Camera* cam = &m_renderer->m_camera;
+
+
+            model.SetPosition({ 0.0,0.0, -10.0});
+
             SDL_Event event;
 
             while (true) 
@@ -43,6 +48,11 @@ namespace App {
                 double elapsed = current - previous;
                 previous = current;
                 lag += elapsed;
+
+                counter += 0.1;
+
+                cam->LookAt({ std::sin(counter) * 10.0,0.0, std::sin(counter) * 10.0 });
+
 
 				m_renderer->m_shader.SetMat4("projection", m_renderer->m_camera.GetProjectionMatrix());
 				m_renderer->m_shader.SetMat4("view", m_renderer->m_camera.GetViewMatrix());
