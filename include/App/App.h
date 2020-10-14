@@ -7,6 +7,7 @@
 #include "Graphics/Camera.h"
 #include "Graphics/Basic-Renderer.h"
 #include "Model/Model.h"
+#include "Util/Random.h"
 
 namespace App {
 
@@ -31,14 +32,31 @@ namespace App {
             double previous = SDL_GetTicks();
             double lag = 0.0;
 
-            float counter = 0.0f;
+            float counter = 0;
 
-            Model::Model model;
+            std::vector<Model::Model> models;
+
+            for(int i = 0; i<= 100; i++)
+            {
+
+                float x = Util::Random::GetFloat(-10,10.0);
+                float y = Util::Random::GetFloat(-10,10.0);
+                float z = -10.0;
+                Model::Model m({x,y,z});
+
+                models.push_back(m);
+
+            }
+
+            Model::Model model({ -4.0,0.0, -10.0});
+            Model::Model model2({ 4.0,0.0, -10.0});
+            Model::Model model3({ 4.0,1.0, -20.0});
 
             Graphics::Camera* cam = &m_renderer->m_camera;
 
-
-            model.SetPosition({ 0.0,0.0, -10.0});
+            //models.push_back(model);
+            //models.push_back(model2);
+            //models.push_back(model3);
 
             SDL_Event event;
 
@@ -49,13 +67,24 @@ namespace App {
                 previous = current;
                 lag += elapsed;
 
-                counter += 0.1;
+                counter += 0.01;
 
-                cam->LookAt({ std::sin(counter) * 10.0,0.0, std::sin(counter) * 10.0 });
+            models.at(1).m_position.z = std::sin(counter) * 10.0;
+            models.at(1).m_position.x = std::cos(counter) * 10.0;
 
+            models.at(2).m_position.x = std::sin(counter) * 10.0;
+            models.at(2).m_position.y = std::cos(counter) * 10.0;
+
+            models.at(9).m_position.y = std::sin(counter) * 10.0;
+            models.at(9).m_position.z = std::cos(counter) * 10.0;
+
+                cam->LookAt({0,0,-50.0 + std::sin(counter) * 20.0});
 
 				m_renderer->m_shader.SetMat4("projection", m_renderer->m_camera.GetProjectionMatrix());
 				m_renderer->m_shader.SetMat4("view", m_renderer->m_camera.GetViewMatrix());
+
+
+				m_renderer->m_shader.SetFloat("time", counter);
 
                 SDL_PollEvent(&event);
                 if (event.type == SDL_QUIT) {
@@ -70,7 +99,7 @@ namespace App {
                     Update(lag / 100);
                 }
 
-                m_renderer->Render(model);
+                m_renderer->Render(models);
 
                 SDL_GL_SwapWindow(m_window.GetWindow());
             }
