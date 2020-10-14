@@ -38,17 +38,18 @@ namespace Graphics {
 		}
 
 
-        void Render(Model::Model& model)
+        void Render(std::vector<Model::Model> &models)
         {
 			m_shader.Use();
-
-            m_shader.SetMat4("model", model.GetMatrix());
 
 			glClearColor(0.9,0.5,0.8,1);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-
+            for(auto &model : models)
+            {
+                m_shader.SetMat4("model", model.GetMatrix());
+                glDrawElements(GL_TRIANGLES, model.m_vertexCount, GL_UNSIGNED_INT, 0);
+            }
         }
 
 		void Render()
