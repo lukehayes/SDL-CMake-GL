@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "GL/BufferTarget.h"
+#include "Mesh/Mesh.h"
 
 namespace GL {
     
@@ -17,6 +18,10 @@ namespace GL {
 
             RawBuffer(const std::vector<float>& verticies, const std::vector<unsigned int>& indicies) {
                 this->Load(verticies, indicies);
+            }
+
+            RawBuffer(const Mesh::Mesh& mesh) {
+                this->Load(mesh.m_verticies, mesh.m_indicies);
             }
             ~RawBuffer(){}
             
