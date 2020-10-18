@@ -14,6 +14,9 @@ namespace Model {
         BaseMesh() {}
         virtual ~BaseMesh(){}
 
+        virtual void SetVertices(const std::vector<float>& verticies) = 0;
+        virtual void SetIndicies(const std::vector<unsigned int>& indicies) = 0;
+
     protected:
         std::vector<float> m_verticies;
         std::vector<unsigned int> m_indcies;
