@@ -7,24 +7,13 @@
 #include "GL/RawBuffer.h"
 #include "Graphics/Basic-Renderer.h"
 #include "Graphics/Camera.h"
+#include "Mesh/RectangleMesh.h"
 
 int main(int argc, char* argv[])
 {
 
     App::App app(800, 600, "Window Title");
 
-    std::vector<float> v = {
-   // positions          // colors           // texture coords
-     0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
-     0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
-    -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
-    -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left 
-    };
-
-    std::vector<unsigned int> i = {
-        0,1,3,
-        1,2,3
-    };
 
     GLenum err = glewInit();
     if (GLEW_OK != err)
@@ -45,9 +34,12 @@ int main(int argc, char* argv[])
     // MUST BE ENABLED FOR TRANSPARENT PNG!
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+
+    Mesh::RectangleMesh mesh;
     
     //GL::Texture t1("doge.png");
-    const GL::RawBuffer buffer(v,i);
+    const GL::RawBuffer buffer(mesh.m_verticies, mesh.m_indicies);
 
 	const std::string vshPath = ShaderResource("default-vsh.glsl");
 	const std::string fshPath = ShaderResource("default-fsh.glsl");
