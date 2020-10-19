@@ -1,3 +1,6 @@
+#ifndef MESH_RECTANGLE_MESH
+#define MESH_RECTANGLE_MESH
+
 #include "Mesh.h"
 
 namespace Mesh
@@ -26,3 +29,5 @@ namespace Mesh
 		std::vector<unsigned int> m_indicies;
 	};
 }
+
+#endif

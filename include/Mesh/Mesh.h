@@ -1,3 +1,6 @@
+#ifndef MESH_MESH
+#define MESH_MESH
+
 namespace Mesh
 {
 	/*
@@ -5,8 +8,12 @@ namespace Mesh
 	*/
 	class Mesh
 	{
-		public:
-			Mesh() {}
-			~Mesh() {}
+	public:
+		Mesh() {}
+		~Mesh() {}
+		std::vector<float> m_verticies;
+		std::vector<unsigned int> m_indicies;
 	};
 }
+
+#endif // !MESH_MESH
