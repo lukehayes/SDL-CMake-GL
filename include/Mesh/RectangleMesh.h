@@ -25,6 +25,9 @@ namespace Mesh
 		}
 		~RectangleMesh() {}
 
+		std::vector<float> GetVerticies() { return this->m_verticies; }
+		std::vector<unsigned int> GetIndicies() { return this->m_indicies; }
+
 		std::vector<float> m_verticies;
 		std::vector<unsigned int> m_indicies;
 	};
